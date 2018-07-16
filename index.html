@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="paginationjs-master/dist/pagination.css">
+    <!-- <link type="text/css" rel="stylesheet" href="simplePagination/simplePagination.css"/> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="paginationjs-master/dist/pagination.js"></script>
+    <title>Pagination</title>
+</head>
+
+<style>
+    body {
+        font-family: "Poppins", arial, "Microsoft JhengHei", \5FAE\8EDF\6B63\9ED1\9AD4, "PMingLiU", \65B0\7D30\660E\9AD4, sans-serif;
+    }
+
+    .paginationjs .paginationjs-pages li {
+        float: left;
+        list-style: none;
+        margin: 0 5px;
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        color: #2e2e2e;
+        border: 1px solid #2e2e2e;
+        border-right: 1px solid #2e2e2e;
+        font-size: 12px;
+        line-height: 38px;
+    }
+
+    .paginationjs-page.J-paginationjs-page:hover,
+    .paginationjs-prev.disabled:hover {
+        background-color: #eee;
+    }
+
+    li.paginationjs-page.J-paginationjs-page,
+    li.paginationjs-prev.J-paginationjs-previous {
+        min-width: 38px;
+        width: 38px;
+        height: 38px;
+        line-height: 38px;
+        display: block;
+        background: #fff;
+        font-size: 14px;
+        color: #333;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    li.paginationjs-page.J-paginationjs-page>a {
+        height: 36px;
+        line-height: 38px;
+    }
+
+    li.paginationjs-prev.J-paginationjs-previous>a,
+    li.paginationjs-next.J-paginationjs-next>a {
+        height: 36px;
+        line-height: 33px;
+    }
+
+    li.paginationjs-ellipsis.disabled {
+        border: none;
+    }
+
+    li.paginationjs-ellipsis.disabled>a {
+        background-color: transparent;
+    }
+
+    .paginationjs .paginationjs-pages li.active>a {
+        height: 38px;
+        line-height: 38px;
+        color: #fff;
+        cursor: not-allowed;
+        background-color: #2e2e2e;
+        border-color: #2e2e2e;
+    }
+
+    .paginationjs-prev.J-paginationjs-previous>a,
+    .paginationjs-next.J-paginationjs-next>a {
+        height: 38px;
+        line-height: 38px;
+        color: #fff;
+        border-color: #2e2e2e;
+    }
+
+    li.paginationjs-prev.disabled>a,
+    li.paginationjs-next.disabled>a {
+        height: 36px;
+        line-height: 36px;
+        cursor: not-allowed;
+        color: #2e2e2e;
+        border-color: #2e2e2e;
+    }
+
+    .paginationjs .paginationjs-pages li:last-child {
+        border-right: 1px solid #2e2e2e;
+    }
+
+    #pagination {
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-4" id="list-group">
+                <!-- 放 list-group 的地方 -->
+            </div>
+            <div class="col-12 p-4 d-flex justify-content-center" id="pagination">
+                <!-- 放 pagination 的地方 -->
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            // 客製化 分頁(pagination) 套件
+            function myProduct(x) {
+                if (x.matches) {
+                    //如果是電腦版螢幕，用比較長的分頁
+                    $('#pagination').pagination({
+                        //在 dataSource 放入商品資料庫的 data，形式可以是陣列、物件、JSON 或是 api
+                        dataSource: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                            20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37
+                        ],
+                        pageSize: 2, // 設定每頁 show 出幾筆資料
+                        callback: function (data, pagination) {
+                            var html = simpleTemplating(data);
+                            $('#list-group').html(html);
+                        }
+                    })
+                } else {
+                    //如果是手機版螢幕，用比較短的分頁
+                    $('#pagination').pagination({
+                        //在 dataSource 放入商品資料庫的 data，形式可以是陣列、物件、JSON 或是 api
+                        dataSource: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                            20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37
+                        ],
+                        pageSize: 2, // 設定每頁 show 出幾筆資料
+                        showPageNumbers: false, // 不要顯示 1,2,3....
+                        showNavigator: true, // 要顯示導航列 (1/10)
+                        callback: function (data, pagination) {
+                            var html = simpleTemplating(data);
+                            $('#list-group').html(html);
+                        }
+                    })
+                }
+            }
+
+            var x = window.matchMedia("(min-width: 576px)") // 設定 RWD 中斷點
+            myProduct(x) // Call listener function at run time
+            x.addListener(myProduct) // Attach listener function on state changes
+
+            /* simpleTemplating Function 裡面做的事 */
+            function simpleTemplating(data) {
+                var html = '<ul class="list-group">';
+                $.each(data, function (index, item) {
+                    html += `<li class="list-group-item">${item}</li>`;
+                });
+                html += '</ul>';
+                return html;
+            }
+        });
+    </script>
+</body>
+
+</html>
